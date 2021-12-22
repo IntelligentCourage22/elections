@@ -77,39 +77,39 @@ fake = Faker()
 # Yeshas - GG4078
 ####
 
-ss = '''Aadya 
-Aarush 
-Aathreya 
-Akanksha 
-Amod 
-Amrit 
-Anikethan 
-Ankit 
-Anshula 
+ss = '''Aadya
+Aarush
+Aathreya
+Akanksha
+Amod
+Amrit
+Anikethan
+Ankit
+Anshula
 Atulya
-Daniel 
-Dharshita 
+Daniel
+Dharshita
 Dhruv
-Harshita 
+Harshita
 Jeevika
-Kenisha 
-Lekshmi 
-Manushree 
-Meghali 
-Meghana 
-Mithil 
-Harshith 
-Navya 
+Kenisha
+Lekshmi
+Manushree
+Meghali
+Meghana
+Mithil
+Harshith
+Navya
 Nihaar
-Nishanth 
-Preryth 
-Riddhima 
+Nishanth
+Preryth
+Riddhima
 Vaibhavi
 Siddarth
-Sohani 
-Swasti 
-Tanya 
-Yeshas '''
+Sohani
+Swasti
+Tanya
+Yeshas'''
 
 li = list(ss.split("\n"))
 
