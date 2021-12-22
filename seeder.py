@@ -126,8 +126,8 @@ def seed_users(num_entries=len(li), overwrite=True):
         first_name = fake.first_name()
         last_name = fake.last_name()
         username = li[i]
-        password = username.join(random.choices(string.ascii_uppercase +
-                                                string.digits, k=3))
+        password = username + "".join(random.choices(string.ascii_uppercase +
+                                                     string.digits, k=3))
         u = User.objects.create_user(
             first_name=first_name,
             last_name=last_name,
