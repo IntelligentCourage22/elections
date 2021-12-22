@@ -1,0 +1,331 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: "Outfit", sans-serif;
+    }
+
+    .wrapper {
+        height: 100vh;
+        background-color: #1b1d28;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .wrapper>label {
+        margin-bottom: 80px;
+        color: #fff;
+        font-size: 40px;
+        font-weight: 400;
+        text-transform: capitalize;
+    }
+
+    .radio-buttons {
+        width: 100%;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .custom-radio input {
+        display: none;
+    }
+
+    .radio-btn {
+        position: relative;
+        width: 234px;
+        height: 260px;
+        margin: 10px;
+        background-color: #222533;
+        border: 4px solid transparent;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+
+    .radio-btn .content {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .radio-btn .profile-img {
+        width: 80px;
+        height: 80px;
+        margin: 20px 0;
+        border-radius: 50%;
+    }
+
+    .radio-btn .profile-img img {
+        height: 100%;
+        width: 100%;
+        user-select: none;
+    }
+
+    .radio-btn label {
+        color: #fff;
+        margin-bottom: 5px;
+        font-size: 20px;
+        font-weight: 700;
+        text-transform: capitalize;
+    }
+
+    .radio-btn .skill {
+        display: inline-block;
+        margin-bottom: 20px;
+        color: #c3c2c7;
+        font-size: 16px;
+        text-transform: capitalize;
+        justify-content: center;
+    }
+
+    .radio-btn .check-icon {
+        width: 30px;
+        height: 30px;
+        background-color: #1b1d28;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    .radio-btn .check-icon .icon {
+        display: inline-block;
+        position: relative;
+        width: 18px;
+        height: 8px;
+        margin-top: -2px;
+        transform: rotate(-90deg);
+    }
+
+    .radio-btn .check-icon .icon::before {
+        content: "";
+        width: 3px;
+        height: 100%;
+        background-color: #fff;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        border: radius 10px;
+        box-shadow: -2px 0 5px rgba(0, 0, 0, 0.231);
+        transform: scaleY(0);
+        transform-origin: top;
+        transition: all 0.2 ease-in-out;
+    }
+
+    .radio-btn .check-icon .icon::after {
+        content: "";
+        width: 3px;
+        height: 100%;
+        background-color: #fff;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        border: radius 10px;
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.231);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: all 0.2 ease-in-out;
+        transition-delay: 0.1s;
+    }
+
+    .custom-radio input:checked+.radio-btn {
+        border: 4px solid #7434c3;
+    }
+
+    .custom-radio input:checked+.radio-btn .check-icon {
+        background-color: #7434c3;
+    }
+
+    .custom-radio input:checked+.radio-btn .check-icon .icon::before,
+    .custom-radio input:checked+.radio-btn .check-icon .icon::after {
+        transform: scale(1);
+    }
+
+    .button {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+</style>
+
+<div class="container">
+
+    <h1 class="mt-3 mb-3">Vote for your candidate: {{ poll }} </h1>
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+        <div {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <hr>
+    <br><br>
+    <form action="{% url 'polls:vote' poll.id %}" method="POST">
+        {% csrf_token %}
+        <!--input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+        <label for="choice{{ forloop.counter }}">{{ choice_text.0 }}</label>
+        <br>
+        <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+        <label for="choice{{ forloop.counter }}">{{ choice_text.1 }}</label>   
+        <br-->
+        <div class="wrapper">
+            <div class="radio-buttons">
+                <label class="custom-radio">
+                    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice_id.0 }}">
+
+                    <div class="radio-btn">
+                        <div class="content">
+                            <div class="profile-img">
+                                <img src="{% static 'daniel.png' %}" alt="" />
+                            </div>
+                            <input type="radio" name="choice" id="choice{{ forloop.counter }}"
+                                value="{{ choice_id.0 }}">
+
+                            <label for="choice">{{ choice_text.0 }}</label>
+                            <span class="skill">United People's Front </span>
+                            <span class="check-icon">
+                                <span class="icon"></span>
+                            </span>
+                        </div>
+                    </div>
+                </label>
+                <label class="custom-radio">
+                    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice_id.1 }}">
+                    <div class="radio-btn">
+                        <div class="content">
+                            <div class="profile-img">
+                                <img src="{% static 'vai.png' %}" alt="" />
+                            </div>
+                            <input type="radio" name="choice" id="choice{{ forloop.counter }}"
+                                value="{{ choice_id.1 }}">
+
+                            <label for="choice{{ forloop.counter }}">{{ choice_text.1 }}</label>
+                            <span class="skill">Bhartiya Revolutionary Party</span>
+                            <span class="check-icon">
+                                <span class="icon"></span>
+                            </span>
+                        </div>
+                    </div>
+                </label>
+                <label class="custom-radio">
+                    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice_id.2 }}">
+                    <div class="radio-btn">
+                        <div class="content">
+                            <div class="profile-img">
+                                <img src="{% static 'atu.png' %}" alt="" />
+                            </div>
+                            <input type="radio" name="choice" id="choice{{ forloop.counter }}"
+                                value="{{ choice_id.2 }}">
+
+                            <label for="choice{{ forloop.counter }}">{{ choice_text.2 }}</label>
+                            <span class="skill">Bhartiya Sanyukt Party </span>
+                            <span class="check-icon">
+                                <span class="icon"></span>
+                            </span>
+                        </div>
+                    </div>
+                </label>
+                <label class="custom-radio">
+                    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice_id.3 }}">
+                    <div class="radio-btn">
+                        <div class="content">
+                            <div class="profile-img">
+                                <img src="{% static 'yeshas.jpg' %}" alt="" />
+                            </div>
+                            <input type="radio" name="choice" id="choice{{ forloop.counter }}"
+                                value="{{ choice_id.3 }}">
+
+                            <label for="choice{{ forloop.counter }}">{{ choice_text.3 }}</label>
+                            <span class="skill">Common People's Party</span>
+                            <span class="check-icon">
+                                <span class="icon"></span>
+                            </span>
+                        </div>
+                    </div>
+                </label>
+                <label class="custom-radio">
+                    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice_id.4 }}">
+                    <div class="radio-btn">
+                        <div class="content">
+                            <div class="profile-img">
+                                <img src="{% static 'anshula.jpg' %}" alt="" />
+                            </div>
+                            <input type="radio" name="choice" id="choice{{ forloop.counter }}"
+                                value="{{ choice_id.4 }}">
+
+                            <label for="choice{{ forloop.counter }}">{{ choice_text.4 }}</label>
+                            <span class="skill">Citizen's Republic Party</span>
+                            <span class="check-icon">
+                                <span class="icon"></span>
+                            </span>
+                        </div>
+                    </div>
+                </label>
+                <label class="custom-radio">
+                    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice_id.5}}">
+                    <div class="radio-btn">
+                        <div class="content">
+                            <div class="profile-img">
+                                <img src="{% static 'dharshita.png' %}" alt="" />
+                            </div>
+                            <input type="radio" name="choice" id="choice{{ forloop.counter }}"
+                                value="{{ choice_id.5 }}">
+
+                            <label for="choice{{ forloop.counter }}">{{ choice_text.5 }}</label>
+                            <span class="skill">Jan Lokpal Party</span>
+                            <span class="check-icon">
+                                <span class="icon"></span>
+                            </span>
+                        </div>
+                    </div>
+                </label>
+
+            </div>
+            <!--input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+            <label for="choice{{ forloop.counter }}">{{ choice_text.0 }}</label>
+            <br>
+            <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+            <label for="choice{{ forloop.counter }}">{{ choice_text.1 }}</label>
+            <br>
+            <input type="submit" value="Vote" class="btn btn-primary mt-3"-->
+
+            <input type="submit" value="Vote" class="button">
+            <a class="btn btn-warning mt-3" href="{% url 'polls:list' %}" role="button">Cancel</a>
+        </div><br><br><br><br><br>
+
+
+
+    </form>
+
+</div>
+
+{% endblock content %}
