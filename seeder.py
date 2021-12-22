@@ -140,12 +140,12 @@ def seed_users(num_entries=len(li), overwrite=True):
         percent_complete = count / num_entries * 100
         print(f"{username} - {password}")
 
-        print(
-            "Adding {} new Users: {:.2f}%".format(
-                num_entries, percent_complete),
-            end='\r',
-            flush=True
-        )
+        # print(
+        #    "Adding {} new Users: {:.2f}%".format(
+        #        num_entries, percent_complete),
+        #    end='\r',
+        #    flush=True
+        # )
     print()
 
     '''if overwrite:
