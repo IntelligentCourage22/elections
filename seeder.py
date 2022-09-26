@@ -41,41 +41,7 @@ fake = Faker()
  Swasti  - X8T0HK  
  Tanya  - Y7FBOB  
  Yeshas - GG4078'''
-####
-#Aadya  - NZSOZ8
-# Aarush  - 0T8VEI: 3.03%
-# Aathreya  - O31BS7: 6.06%
-# Akanksha  - 628TZW: 9.09%
-# Amod  - K816J2U: 12.12%
-# Amrit  - H7LKNH: 15.15%
-# Anikethan  - QN8IXM: 18.18%
-# Ankit  - QT7QPX: 21.21%
-# Anshula  - 51KZGS: 24.24%
-# Atulya - 0DWB3V: 27.27%
-# Daniel  - PWZO9V: 30.30%
-# Dharshita  - M5MBND: 33.33%
-# Dhruv - D1R13L: 36.36%
-# Harshita  - VVAT1B: 39.39%
-# Jeevika - BKBUGF: 42.42%
-# Kenisha  - YA5PBG: 45.45%
-# Lekshmi  - DUOQGY: 48.48%
-# Manushree  - 3NGFFV: 51.52%
-# Meghali  - 2HURHU: 54.55%
-# Meghana  - VXWRCC: 57.58%
-# Mithil  - MET72N: 60.61%
-# Harshith  - P1V7N3: 63.64%
-# Navya  - 8WV9GY: 66.67%
-# Nihaar - BCR49L: 69.70%
-# Nishanth  - 3D037I: 72.73%
-# Preryth  - MTB27Y: 75.76%
-# Riddhima  - E7A2AK: 78.79%
-# Vaibhavi - 8RHWQL: 81.82%
-# Siddarth - DQ7N29: 84.85%
-# Sohani  - VE6E63: 87.88%
-# Swasti  - X8T0HK: 90.91%
-# Tanya  - Y7FBOB: 93.94%
-# Yeshas - GG4078
-####
+
 
 ss = '''Aadya
 Aarush
@@ -173,10 +139,7 @@ def seed_users(num_entries=len(li), overwrite=True):
 
 
 def seed_polls(num_entries=10, choice_min=2, choice_max=5, overwrite=False):
-    """
-    Seeds num_entries poll with random users as owners
-    Each poll will be seeded with # choices from choice_min to choice_max
-    """
+
     if overwrite:
         print('Overwriting polls')
         Poll.objects.all().delete()
@@ -207,11 +170,7 @@ def seed_polls(num_entries=10, choice_min=2, choice_max=5, overwrite=False):
 
 
 def seed_votes():
-    """
-    Creates a new vote on every poll for every user
-    Voted for choice is selected random.   
-    Deletes all votes prior to adding new ones
-    """
+
     Vote.objects.all().delete()
     users = User.objects.all()
     polls = Poll.objects.all()
@@ -237,10 +196,7 @@ def seed_votes():
 
 
 def seed_all(num_entries=10, overwrite=False):
-    """
-    Runs all seeder functions. Passes value of overwrite to all
-    seeder function calls.
-    """
+ 
     start_time = time.time()
     # run seeds
     seed_users(num_entries=num_entries, overwrite=overwrite)
